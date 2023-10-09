@@ -42,42 +42,50 @@ while True:
   '''/////////////////////////////////////////////////////////////////////// BATTLE ///////////////////'''
   
   while True:
-    time.sleep(3)
+    time.sleep(2)
     c1roll = roll(6)
     c2roll = roll(6)
+    damage = abs(char1stng - char2stng)+1
 ############### char1 giving damage ################
     if c1roll > c2roll:
-      damage = abs(char1stng - char2stng)+1
-      losthp1 = char2hp - damage
+      char2hp = char2hp - damage
       print(c2name, 'has taken some serious damage and lost', damage, 'healthpoints')
       print()
+      time.sleep(2)
       print(c1name, 'wins the round', round)
       print()
+      time.sleep(2)
+      print(c2name, 'HEALTH: ', char2hp)
+      print()
       round += 1
+      if char2hp <= 0:
+        print(c1name, 'has died; defeated in', round, 'rounds')
+        time.sleep(1)
+        print(c1name, 'remains the legend!')
+        exit()
 ############### char2 giving damage ################
     elif c2roll > c1roll:
-      damage = abs(char2stng - char1stng)+1
-      losthp2 = char1hp - damage
+      char1_new_health = char1hp - damage
+      char1hp = char1_new_health
       print(c1name, 'has taken some serious damage and lost', damage, 'healthpoints')
       print()
+      time.sleep(2)
       print(c2name, 'wins round', round)
       print()
-      print(c1name, 'HEALTH: ', losthp2)
-      round += 1
-####################### draw #######################
-    else:
-      print('It is a draw')
+      time.sleep(2)
+      print(c1name, 'HEALTH: ', char1_new_health)
       print()
-    '''/////////////////// DIED /////////////////'''
-    if losthp1 <= 0:
-      print(c1name, 'has died; defeated in', round, 'rounds')
-      print(c2name, 'is the new legend!')
-      break
+      round += 1
+      if char1_new_health <= 0:
+        print(c1name, 'has died; defeated in', round, 'rounds')
+        time.sleep(1)
+        print()
+        print(c2name, 'is the new legend!')
+        exit()
+
+    
       
-    elif losthp2 <= 0:
-      print(c2name, 'has died; defeated in', round, 'rounds')
-      print(c1name, 'remains the legend!')
-      break
+    
     
     
     
